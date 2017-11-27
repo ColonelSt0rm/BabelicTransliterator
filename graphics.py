@@ -4,17 +4,16 @@
 #   Babelic Transliterator encrypted message
 #   generator under the MIT license utilizing
 #   TKinter
+import sys
+sys.path.insert(0, './Library-Of-Babel')
+
 from tkinter import *
 import time
 import os
 import re
+import library_of_babel
 
-def getAddress(filename):
-    if os.path.isfile(filename):
-        with open(filename, 'r') as f:
-            lines = f.readlines()
-            counter = 0
-            return(lines[4][10:])
+
 
 
 class App:
@@ -57,6 +56,11 @@ class App:
         root.mainloop()
         root.destroy()
 
+    def getAddress():
+        if os.path.isfile(filename):
+            with open(filename, 'r') as f:
+                lines = f.readlines()
+                return(lines[4][10:])
     def displayAddr(self):
         address = getAddress("out.txt")
         self.tb.insert(INSERT, address)
