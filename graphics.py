@@ -6,6 +6,16 @@
 #   TKinter
 from tkinter import *
 import time
+import os
+import re
+
+def getAddress(filename):
+    if os.path.isfile(filename):
+        with open(filename, 'r') as f:
+            lines = f.readlines()
+            counter = 0
+            return(lines[4][10:])
+
 
 class App:
 
@@ -21,7 +31,7 @@ class App:
             self.frame, text="Search", command=self.sayHi
         )
         self.importer = Button(
-            self.frame, text="Import", command=None
+            self.frame, text="Import", command=self.displayAddr
         )
         self.translator = Button(
             self.frame, text="Translate", command=None
@@ -46,6 +56,11 @@ class App:
         #root.resizable(width=False, height=False)
         root.mainloop()
         root.destroy()
+
+    def displayAddr(self):
+        address = getAddress("out.txt")
+        self.tb.insert(INSERT, address)
+        self.tb.grid(rowspan = 4, row=1, column=0)
 
     def sayHi(self):
         print("HI!")
