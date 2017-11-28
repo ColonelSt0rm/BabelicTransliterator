@@ -5,16 +5,14 @@
 #   generator under the MIT license utilizing
 #   TKinter
 import sys
-sys.path.insert(0, './Library-Of-Babel')
+sys.path.insert(0, './Library-Of-Pybel')
 
 from tkinter import *
+from tkinter import filedialog
 import time
 import os
 import re
 import library_of_babel
-
-
-
 
 class App:
 
@@ -56,13 +54,14 @@ class App:
         root.mainloop()
         root.destroy()
 
-    def getAddress():
+    def getAddress(self):
+        filename = filedialog.askopenfilename(initialdir = ".")
         if os.path.isfile(filename):
             with open(filename, 'r') as f:
                 lines = f.readlines()
                 return(lines[4][10:])
     def displayAddr(self):
-        address = getAddress("out.txt")
+        address = self.getAddress()
         self.tb.insert(INSERT, address)
         self.tb.grid(rowspan = 4, row=1, column=0)
 
